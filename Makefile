@@ -7,15 +7,16 @@ CC = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98 -MMD -MP
 
 NAME = ircserv
+PASSWORD = password
 
 all: $(NAME)
 
 start: re
-	./$(NAME) 6667 test 
+	./$(NAME) 6667 $(PASSWORD) 
 
 debug: FLAGS += -DDEBUG -g3
 debug: re
-	valgrind --track-fds=yes ./$(NAME) 6667 test
+	valgrind --track-fds=yes ./$(NAME) 6667 $(PASSWORD)
 
 $(NAME): $(OBJECTS)
 	$(CC) $(FLAGS) -I $(INCLUDES) $(OBJECTS) -o $(NAME)
